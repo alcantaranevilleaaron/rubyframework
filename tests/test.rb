@@ -35,4 +35,14 @@ freelancer_hash.each do |freelancer_name, freelancer_info|
   puts ''
 end
 
+random = rand(freelancer_hash.length)
+freelancer_name = freelancer_keys[random]
+
+freelancer_page = search_page.view_freelancer(freelancer_name)
+
+puts freelancer_page.freelancer_name.text
+puts freelancer_page.freelancer_title.text
+puts freelancer_page.freelancer_overview.text
+puts freelancer_page.freelancer_skills.text
+
 driver.close_browser

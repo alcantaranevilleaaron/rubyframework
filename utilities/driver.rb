@@ -7,6 +7,10 @@ class Driver
     @driver = Selenium::WebDriver.for :chrome
   end
 
+  def get_driver
+    return @driver
+  end
+
   def navigate_to_url(url)
     @driver.manage.window.maximize
     @driver.manage.delete_all_cookies

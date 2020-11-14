@@ -1,3 +1,5 @@
+require_relative '../pageobjects/freelancer_page'
+
 class SearchResultPage
 
   def initialize(driver)
@@ -22,6 +24,11 @@ class SearchResultPage
 
   def freelancer_skills(freelancer)
     @driver.find_child_element(freelancer, :css, "div[class='up-skill-container attr-skill group']")
+  end
+
+  def view_freelancer(freelancer_name)
+    @driver.find_elements(:css, "div[class='identity-name'").select { |el| el.text == freelancer_name}.first.click
+    FreelancerPage.new(@driver)
   end
 
   def extract_freelancers_info
