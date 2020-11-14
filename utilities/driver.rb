@@ -3,12 +3,13 @@ require 'selenium-webdriver'
 class Driver
 
   def initialize
-    Selenium::WebDriver::Chrome::Service.driver_path = "C:/Users/Russell/RubymineProjects/chromedriver.exe"
+    Selenium::WebDriver::Chrome::Service.driver_path = File.expand_path('..') + "/resources/drivers/chromedriver.exe"
     @driver = Selenium::WebDriver.for :chrome
   end
 
   def navigate_to_url(url)
     @driver.manage.window.maximize
+    @driver.manage.delete_all_cookies
     @driver.navigate.to url
   end
 

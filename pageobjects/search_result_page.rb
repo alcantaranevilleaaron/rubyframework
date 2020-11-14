@@ -37,7 +37,7 @@ class SearchResultPage
       freelancer_hash[freelancer_name] = {}
       freelancer_hash[freelancer_name]['freelancer_title'] = freelancer_title
       freelancer_hash[freelancer_name]['freelancer_overview'] = freelancer_overview
-      freelancer_hash[freelancer_name]['freelancer_skills'] = freelancer_skills
+      freelancer_hash[freelancer_name]['freelancer_skills'] = freelancer_skills.gsub("\n", ',')
     end
     return freelancer_hash
   end
