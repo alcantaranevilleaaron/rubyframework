@@ -1,0 +1,35 @@
+require 'selenium-webdriver'
+
+class Driver
+
+  def initialize
+    Selenium::WebDriver::Chrome::Service.driver_path = "C:/Users/Russell/RubymineProjects/chromedriver.exe"
+    @driver = Selenium::WebDriver.for :chrome
+  end
+
+  def navigate_to_url(url)
+    @driver.manage.window.maximize
+    @driver.navigate.to url
+  end
+
+  def find_element(locator, value)
+    @driver.find_element(locator, value)
+  end
+
+  def find_elements(locator, value)
+    @driver.find_elements(locator, value)
+  end
+
+  def find_child_element(element, locator, value)
+    element.find_element(locator, value)
+  end
+
+  def find_child_elements(element, locator, value)
+    element.find_elements(locator, value)
+  end
+
+  def close_browser
+    @driver.quit
+  end
+
+end
