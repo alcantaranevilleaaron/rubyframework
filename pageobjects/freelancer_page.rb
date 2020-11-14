@@ -36,4 +36,18 @@ class FreelancerPage
     @driver.find_child_element(freelancer_profile_slider, :css, "div[class='skills']")
   end
 
+  def extract_freelancer_info
+    freelancer_info_name = freelancer_name.text
+    freelancer_info_title = freelancer_title.text
+    freelancer_info_overview = freelancer_overview.text
+    freelancer_info_skills = freelancer_skills.text
+
+    freelancer_hash = {}
+    freelancer_hash['freelancer_title'] = freelancer_info_title
+    freelancer_hash['freelancer_overview'] = freelancer_info_overview.gsub("\n", ' ')
+    freelancer_hash['freelancer_skills'] = freelancer_info_skills.gsub("\n", ',').sub!('Skills,', '')
+
+    return freelancer_hash
+  end
+
 end

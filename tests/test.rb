@@ -38,11 +38,30 @@ end
 random = rand(freelancer_hash.length)
 freelancer_name = freelancer_keys[random]
 
+# 8. Click on random freelancer's title
 freelancer_page = search_page.view_freelancer(freelancer_name)
 
-puts freelancer_page.freelancer_name.text
-puts freelancer_page.freelancer_title.text
-puts freelancer_page.freelancer_overview.text
-puts freelancer_page.freelancer_skills.text
+# 9. Get into the freelancer's profile and extract the information into a hash
+freelancer_profile = freelancer_page.extract_freelancer_info
+
+# 10. Compare attribute values from step #6
+# 11. Check whether the profile attribute value contains <keyword>
+freelancer_search = freelancer_hash[freelancer_name]
+freelancer_profile.each do |freelancer_profile_attr, freelancer_profile_attr_value|
+  puts "search attr:  " + freelancer_search[freelancer_profile_attr]
+  puts "profile attr: " + freelancer_profile_attr_value
+
+  match_keyword = " DOES NOT MATCH"
+  if freelancer_search[freelancer_profile_attr].eql?(freelancer_profile_attr_value)
+    match_keyword = " DOES MATCH"
+  end
+  puts freelancer_profile_attr + match_keyword
+
+  contain_keyword = ' DOES NOT CONTAIN '
+  if driver.contains_ignore_case(freelancer_profile_attr_value, keyword)
+    contain_keyword = ' CONTAINS '
+  end
+  puts freelancer_profile_attr_value + contain_keyword + keyword
+end
 
 driver.close_browser
