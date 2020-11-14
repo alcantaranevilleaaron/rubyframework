@@ -7,17 +7,12 @@ driver.navigate_to_url("https://www.upwork.com/")
 home_page = HomePage.new(driver)
 search_page = home_page.search_professional("tester")
 
-freelancers = search_page.extract_freelancers
+freelancer_hash = search_page.extract_freelancers_info
+freelancer_keys = freelancer_hash.keys
 
-freelancer_hash = Hash.new()
-freelancers.each do |freelancer|
-  freelancer_name = search_page.freelancer_name(freelancer).text
-  freelancer_title = search_page.freelancer_title(freelancer).text
-  puts freelancer_name + " : " + freelancer_title
+puts freelancer_keys[5]
+puts freelancer_hash[freelancer_keys[5]]['freelancer_title']
+puts freelancer_hash[freelancer_keys[5]]['freelancer_overview']
+puts freelancer_hash[freelancer_keys[5]]['freelancer_skills']
 
-  freelancer_hash[freelancer_name] = Hash.new()
-  freelancer_hash[freelancer_name]['freelancer_title'] = freelancer_title
-end
-
-puts freelancer_hash['Julia A.']['freelancer_title']
 driver.close_browser

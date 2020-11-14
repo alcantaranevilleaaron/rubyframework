@@ -16,4 +16,30 @@ class SearchResultPage
     @driver.find_child_element(freelancer, :css, "p[class='my-0 freelancer-title']")
   end
 
+  def freelancer_overview(freelancer)
+    @driver.find_child_element(freelancer, :css, "p[class='overview mb-0']")
+  end
+
+  def freelancer_skills(freelancer)
+    @driver.find_child_element(freelancer, :css, "div[class='up-skill-container attr-skill group']")
+  end
+
+  def extract_freelancers_info
+    freelancers = extract_freelancers
+
+    freelancer_hash = {}
+    freelancers.each do |freelancer|
+      freelancer_name = freelancer_name(freelancer).text
+      freelancer_title = freelancer_title(freelancer).text
+      freelancer_overview = freelancer_overview(freelancer).text
+      freelancer_skills = freelancer_skills(freelancer).text
+
+      freelancer_hash[freelancer_name] = {}
+      freelancer_hash[freelancer_name]['freelancer_title'] = freelancer_title
+      freelancer_hash[freelancer_name]['freelancer_overview'] = freelancer_overview
+      freelancer_hash[freelancer_name]['freelancer_skills'] = freelancer_skills
+    end
+    return freelancer_hash
+  end
+
 end
