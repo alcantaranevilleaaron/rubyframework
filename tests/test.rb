@@ -22,10 +22,17 @@ search_page = home_page.search_professional(keyword)
 freelancer_hash = search_page.extract_freelancers_info
 freelancer_keys = freelancer_hash.keys
 
-puts "Size of result: " + freelancer_hash.length.to_s
-puts freelancer_keys[5]
-puts freelancer_hash[freelancer_keys[5]]['freelancer_title']
-puts freelancer_hash[freelancer_keys[5]]['freelancer_overview']
-puts freelancer_hash[freelancer_keys[5]]['freelancer_skills']
+# 7. Check whether the attributes does have the <keyword> in it
+freelancer_hash.each do |freelancer_name, freelancer_info|
+  puts freelancer_name
+  freelancer_info.each do |freelancer_attr, freelancer_attr_value|
+    contain_keyword = ' DOES NOT CONTAIN '
+    if driver.contains_ignore_case(freelancer_attr_value, keyword)
+      contain_keyword = ' CONTAINS '
+    end
+    puts freelancer_attr + contain_keyword + keyword
+  end
+  puts ''
+end
 
 driver.close_browser

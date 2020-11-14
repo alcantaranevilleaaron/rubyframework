@@ -29,6 +29,10 @@ class Driver
     element.find_elements(locator, value)
   end
 
+  def contains_ignore_case(str, keyword)
+    (str =~ /#{keyword}/i) != nil
+  end
+
   def close_browser
     @driver.quit
   end
