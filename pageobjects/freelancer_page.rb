@@ -37,6 +37,7 @@ class FreelancerPage
   end
 
   def extract_freelancer_info
+    $stdout.puts "Parsing inside the freelancer profile the freelancer_name, freelancer_title, freelancer_overview, freelancer_skills and storing it in a nested hash."
     freelancer_info_name = freelancer_name.text
     freelancer_info_title = freelancer_title.text
     freelancer_info_overview = freelancer_overview.text

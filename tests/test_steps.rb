@@ -34,19 +34,22 @@ driver.wait_until_element_is_present(search_page.header)
 freelancer_hash = search_page.extract_freelancers_info
 freelancer_keys = freelancer_hash.keys
 
-# 7. Check whether the attributes does have the <keyword> in it
+# 7. Check whether the attributes contains the <keyword>
+$stdout.puts ''
+$stdout.puts 'Check whether the attributes contains the keyword: ' + keyword
 freelancer_hash.each do |freelancer_name, freelancer_info|
-  puts freelancer_name
+  $stdout.puts 'Freelancer Name: ' + freelancer_name
   freelancer_info.each do |freelancer_attr, freelancer_attr_value|
-    contain_keyword = ' DOES NOT CONTAIN '
+    contain_keyword = ' -- DOES NOT CONTAIN '
     if driver.contains_ignore_case(freelancer_attr_value, keyword)
-      contain_keyword = ' CONTAINS '
+      contain_keyword = ' -- CONTAINS '
     end
-    puts freelancer_attr + contain_keyword + keyword
+    $stdout.puts "\t" + freelancer_attr + contain_keyword + keyword + ' (Value is: ' + freelancer_attr_value + ')'
   end
-  puts ''
+  $stdout.puts ''
 end
 
+$stdout.puts 'Generating random number to extract random freelancer from hash'
 random = rand(freelancer_hash.length)
 freelancer_name = freelancer_keys[random]
 
@@ -60,22 +63,25 @@ freelancer_profile = freelancer_page.extract_freelancer_info
 
 # 10. Compare attribute values from step #6
 # 11. Check whether the profile attribute value contains <keyword>
+$stdout.puts ''
+$stdout.puts 'Comparing attributes of ' + freelancer_name + ' from search page.'
 freelancer_search = freelancer_hash[freelancer_name]
 freelancer_profile.each do |freelancer_profile_attr, freelancer_profile_attr_value|
-  puts "search attr:  " + freelancer_search[freelancer_profile_attr]
-  puts "profile attr: " + freelancer_profile_attr_value
+  $stdout.puts "\t" + 'Search Page Attribute  (' + freelancer_profile_attr + ') :' + freelancer_search[freelancer_profile_attr]
+  $stdout.puts "\t" + 'Profile Page Attribute (' + freelancer_profile_attr + ') :' + freelancer_profile_attr_value
 
-  match_keyword = " DOES NOT MATCH"
+  match_keyword = " -- DOES NOT MATCH"
   if freelancer_search[freelancer_profile_attr].eql?(freelancer_profile_attr_value)
-    match_keyword = " DOES MATCH"
+    match_keyword = " -- DOES MATCH"
   end
-  puts freelancer_profile_attr + match_keyword
+  puts "\t\tATTRIBUTE " + freelancer_profile_attr + match_keyword
 
-  contain_keyword = ' DOES NOT CONTAIN '
+  $stdout.puts 'Check whether the profile attribute (' + freelancer_profile_attr + ') contains the keyword: ' + keyword
+  contain_keyword = ' -- DOES NOT CONTAIN '
   if driver.contains_ignore_case(freelancer_profile_attr_value, keyword)
-    contain_keyword = ' CONTAINS '
+    contain_keyword = ' -- CONTAINS '
   end
-  puts freelancer_profile_attr_value + contain_keyword + keyword
+  puts "\t" + freelancer_profile_attr_value + contain_keyword + keyword
 end
 
 driver.close_browser

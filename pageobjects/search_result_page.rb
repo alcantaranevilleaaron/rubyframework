@@ -31,11 +31,13 @@ class SearchResultPage
   end
 
   def view_freelancer(freelancer_name)
+    $stdout.puts "Clicking " + freelancer_name + " profile link"
     @driver.find_elements(:css, "div[class='identity-name'").select { |el| el.text == freelancer_name}.first.click
     FreelancerPage.new(@driver)
   end
 
   def extract_freelancers_info
+    $stdout.puts "Parsing freelancer_name, freelancer_title, freelancer_overview, freelancer_skills and storing it in a nested hash."
     freelancers = extract_freelancers
 
     freelancer_hash = {}
