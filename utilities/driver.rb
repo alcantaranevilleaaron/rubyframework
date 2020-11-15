@@ -1,14 +1,21 @@
 require 'selenium-webdriver'
+require 'yaml'
 
 class Driver
 
   def initialize
-    Selenium::WebDriver::Chrome::Service.driver_path = File.expand_path('..') + "/resources/drivers/chromedriver.exe"
-    @driver = Selenium::WebDriver.for :chrome
+    browser = get_browser
+    if browser.eql?('firefox')
+      Selenium::WebDriver::Chrome::Service.driver_path = File.expand_path('..') + "/resources/drivers/geckodriver.exe"
+      @driver = Selenium::WebDriver.for :firefox
+    else
+      Selenium::WebDriver::Chrome::Service.driver_path = File.expand_path('..') + "/resources/drivers/chromedriver.exe"
+      @driver = Selenium::WebDriver.for :chrome
+    end
   end
 
   def get_driver
-    return @driver
+    @driver
   end
 
   def navigate_to_url(url)
@@ -35,6 +42,16 @@ class Driver
 
   def contains_ignore_case(str, keyword)
     (str =~ /#{keyword}/i) != nil
+  end
+
+  def get_property(prop_name)
+    config_path = File.expand_path('..') + "/resources/config/config.yml"
+    config = YAML.load_file(config_path)
+    config[prop_name]
+  end
+
+  def get_browser
+    get_property('browser')
   end
 
   def close_browser
