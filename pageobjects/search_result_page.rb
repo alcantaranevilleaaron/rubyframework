@@ -6,6 +6,10 @@ class SearchResultPage
     @driver = driver
   end
 
+  def header
+    @driver.find_element(:css, "h1[class^='top-freelancers']")
+  end
+
   def extract_freelancers
     @driver.find_elements(:css, "div[class='up-card-section up-card-hover']")
   end

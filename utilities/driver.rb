@@ -40,6 +40,11 @@ class Driver
     element.find_elements(locator, value)
   end
 
+  def wait_until_element_is_present(element)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until { element.displayed? }
+  end
+
   def contains_ignore_case(str, keyword)
     (str =~ /#{keyword}/i) != nil
   end
