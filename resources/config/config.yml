@@ -1,3 +1,4 @@
 ---
     browser: chrome
     url: https://www.upwork.com/
+    timeout: 10
