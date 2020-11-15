@@ -5,7 +5,7 @@ require_relative '../pageobjects/home_page.rb'
 test_data_path = File.expand_path('..') + "/resources/testdata/keywords.txt"
 f = File.open(test_data_path, "r")
 
-# Run test_steps script to execute the corresponding test steps
+# Load string from text file to keyword variable
 keyword = ''
 f.each_line do |line|
   keyword = line
