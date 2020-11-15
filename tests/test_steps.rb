@@ -40,9 +40,9 @@ $stdout.puts 'Check whether the attributes contains the keyword: ' + keyword
 freelancer_hash.each do |freelancer_name, freelancer_info|
   $stdout.puts 'Freelancer Name: ' + freelancer_name
   freelancer_info.each do |freelancer_attr, freelancer_attr_value|
-    contain_keyword = ' -- DOES NOT CONTAIN '
+    contain_keyword = "\t -- DOES NOT CONTAIN "
     if driver.contains_ignore_case(freelancer_attr_value, keyword)
-      contain_keyword = ' -- CONTAINS '
+      contain_keyword = "\t -- CONTAINS "
     end
     $stdout.puts "\t" + freelancer_attr + contain_keyword + keyword + ' (Value is: ' + freelancer_attr_value + ')'
   end
@@ -76,12 +76,12 @@ freelancer_profile.each do |freelancer_profile_attr, freelancer_profile_attr_val
   end
   puts "\t\tATTRIBUTE " + freelancer_profile_attr + match_keyword
 
-  $stdout.puts 'Check whether the profile attribute (' + freelancer_profile_attr + ') contains the keyword: ' + keyword
+  $stdout.puts "\tCheck whether the profile attribute (" + freelancer_profile_attr + ") contains the keyword: " + keyword
   contain_keyword = ' -- DOES NOT CONTAIN '
   if driver.contains_ignore_case(freelancer_profile_attr_value, keyword)
     contain_keyword = ' -- CONTAINS '
   end
-  puts "\t" + freelancer_profile_attr_value + contain_keyword + keyword
+  puts "\t\t" + freelancer_profile_attr_value + contain_keyword + keyword
 end
 
 driver.close_browser
