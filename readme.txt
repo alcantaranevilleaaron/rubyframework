@@ -7,3 +7,5 @@ This is a Selenium Project written in Ruby following the Page Object Design Patt
 	c. timeout: defined timeout for element search (in seconds)
 	d. captcha_wait: defined sleep time for the script while completing captcha (in seconds
 3. Test data is stored under resources\testdata\keywords.txt (Note: For this task, this file will only accept one word as input)
+4. Test script file is under tests\test_steps.rb
+5. You can access the git repository under this url: https://github.com/alcantaranevilleaaron/rubyframework
