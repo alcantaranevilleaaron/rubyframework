@@ -30,12 +30,23 @@ class SearchResultPage
     @driver.find_child_element(freelancer, :css, "div[class='up-skill-container attr-skill group']")
   end
 
+  # This will click a freelancer profile based on the provided freelancer_name
+  # String freelancer_name
+  # Return FreelancerPage instance
   def view_freelancer(freelancer_name)
     $stdout.puts "Clicking " + freelancer_name + " profile link"
     @driver.find_elements(:css, "div[class='identity-name'").select { |el| el.text == freelancer_name}.first.click
     FreelancerPage.new(@driver)
   end
 
+  # This will extract information from the search result page
+  # Return hash with below information
+  # {
+  #   freelancer_name: {
+  #     freelancer_title: <value>,
+  #     freelancer_overview: <value>,
+  #     freelancer_skills: <value> }
+  # }
   def extract_freelancers_info
     $stdout.puts "Parsing freelancer_name, freelancer_title, freelancer_overview, freelancer_skills and storing it in a nested hash."
     freelancers = extract_freelancers

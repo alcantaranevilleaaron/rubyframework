@@ -36,6 +36,13 @@ class FreelancerPage
     @driver.find_child_element(freelancer_profile_slider, :css, "div[class='skills']")
   end
 
+  # This will extract information of a freelancer from the freelancer profile page
+  # Return hash with below information
+  # {
+  #     freelancer_title: <value>,
+  #     freelancer_overview: <value>,
+  #     freelancer_skills: <value>
+  # }
   def extract_freelancer_info
     $stdout.puts "Parsing inside the freelancer profile the freelancer_name, freelancer_title, freelancer_overview, freelancer_skills and storing it in a nested hash."
     freelancer_info_name = freelancer_name.text
